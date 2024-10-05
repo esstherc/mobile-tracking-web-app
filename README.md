@@ -4,7 +4,7 @@
 ## Workflow
 ![Flowchart](https://github.com/esstherc/mobile-tracking-web-app/blob/main/images/Flowchart.jpg)
 
-We used TeleportHQ to design the UI of our mobile tracker. The navigation bar consists of five components:
+I used Figma to design the UI of our mobile tracker. The navigation bar consists of five components:
 
 	1.	Back to homepage icon button
 	2.	Instruction scroll down button
@@ -23,7 +23,7 @@ After completing the UI design, we integrated the following functions in start-t
 
 The CSV file serves as the database for storing location and timestamp information during the geolocation process. A PHP script is used to convert CSV data into JSON files for use in Mapbox.
 
-Data Collection and Transmission
+## Data Collection and Transmission
 
 The data collection begins with the geolocation of the user, achieved through the myGeoLocator function. Once authenticated using a valid user ID, the function:
 

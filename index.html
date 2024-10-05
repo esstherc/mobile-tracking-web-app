@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!--metadata information -->
+    <title>Mobile Tracker</title>
+    <link rel="icon" type="image/x-con" href="https://pic.onlinewebfonts.com/svg/img_509228.png">
+    <meta property="og:title" content="Mobile Tracking" />
+
+    <!--style information -->
+    <style data-tag="reset-style-sheet">
+      html {  line-height: 1.15;}body {  margin: 0;}* {  box-sizing: border-box;  border-width: 0;  border-style: solid;}p,li,ul,pre,div,h1,h2,h3,h4,h5,h6 {  margin: 0;  padding: 0;}button {  background-color: transparent;}button,input,optgroup,select,textarea {  font-family: inherit;  font-size: 100%;  line-height: 1.15;  margin: 0;}button,select {  text-transform: none;}button,[type="button"],[type="reset"],[type="submit"] {  -webkit-appearance: button;}button::-moz-focus-inner,[type="button"]::-moz-focus-inner,[type="reset"]::-moz-focus-inner,[type="submit"]::-moz-focus-inner {  border-style: none;  padding: 0;}button:-moz-focus,[type="button"]:-moz-focus,[type="reset"]:-moz-focus,[type="submit"]:-moz-focus {  outline: 1px dotted ButtonText;}a {  color: inherit;  text-decoration: inherit;}input {  padding: 2px 4px;}img {  display: block;}html { scroll-behavior: smooth  }
+    </style>
+    <style data-tag="default-style-sheet">
+      html {
+        font-family: Titillium Web;
+        font-size: 16px;
+      }
+
+      body {
+        font-weight: 400;
+        font-style:normal;
+        text-decoration: none;
+        text-transform: none;
+        letter-spacing: normal;
+        line-height: 1.15;
+        color: var(--dl-color-scheme-green100);
+        background-color: var(--dl-color-scheme-yellow20);
+
+      }
+    </style>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Lexend:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&amp;display=swap"
+      data-tag="font"
+    />
+    <!--This is the head section-->
+    <!-- <script type="text/javascript"> ... </script> -->
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div>
+      <link href="./home.css" rel="stylesheet" />
+
+      <div class="home-container">
+        <!--Navigation bar-->
+        <div class="home-navbar navbar-container">
+          <div class="max-width">
+            <!--navigation bar lefthandside-->
+            <div class="home-logo">
+              <!--icon that allows users to back to homepage-->
+              <a href="index.html" class="home-navlink">
+                <img
+                  alt="image"
+                  src="public/playground_assets/group_2.svg"
+                  class="home-image"
+                />
+              </a>
+              <!--Project Title-->
+              <span class="home-text">
+                <span class="home-text01">GROUP2 -</span>
+                <span>Mobile Tracking App</span>
+              </span>
+            </div>
+            <!--navigation bar righthandside-->
+            <div class="home-links">
+              <!--click to scroll down homepage to instruction section -->
+              <a 
+                href="#instruction" 
+                class="home-link button button-primary"
+              >
+                How it Works
+              </a>
+              <!--click to see path visualization map-->
+              <button class="home-button button button-primary">
+                <a
+                href="Map.html">Path Visualization
+				        </a>
+              </button>
+              <!--click to see space time path-->
+              <button class="home-button1 button button-primary">
+                <a 
+                href="path.html"> Space Time Path
+              </a>
+              </button>
+              <!--click to enter tracking page-->
+              <a
+                href="start-track.html"
+                class="home-navlink1 button button-primary"
+              >
+                Log in
+              </a>
+            </div>
+            <div class="home-burger-menu navbar-burger-menu">
+              <svg viewBox="0 0 1024 1024" class="home-icon">
+                <path
+                  d="M128 256h768v86h-768v-86zM128 554v-84h768v84h-768zM128 768v-86h768v86h-768z"
+                ></path>
+              </svg>
+            </div>
+          </div>
+        </div>
+        <div class="home-hero hero-container section-container">
+          <div class="home-max-width1 max-width">
+            <!--short discription-->
+            <div class="home-content">
+              <span class="home-subtitle before-Heading">Mobile Tracker</span>
+              <h1 class="home-title">Track and display your routes!</h1>
+              <span class="home-description">
+                Track your travelling or walking routes with our mobile tracker
+                and use our space-time path visualization tools to display your
+                routes in 3D!
+              </span>
+              <div class="home-container1">
+                <!--another logo in button-->
+                <a
+                  href="start-track.html"
+                  class="home-navlink2 button button-gradient"
+                >
+                  Log in
+                </a>
+              </div>
+            </div>
+            <img
+              alt="image"
+              src="https://images.unsplash.com/uploads/1412533519888a485b488/bb9f9777?ixid=Mnw5MTMyMXwwfDF8c2VhcmNofDl8fGhpa2luZ3xlbnwwfHx8fDE2NjcxNjczOTc&amp;ixlib=rb-4.0.3&amp;w=1200"
+              class="home-hero-image"
+            />
+          </div>
+        </div>
+        <div id="instruction" class="home-section section-container">
+          <div class="home-max-width2 max-width">
+            <div class="home-image1">
+              <img
+                alt="image"
+                src="https://images.unsplash.com/photo-1604357209793-fca5dca89f97?ixid=Mnw5MTMyMXwwfDF8c2VhcmNofDE0fHxtYXAlMjByb3V0ZXxlbnwwfHx8fDE2NjcxNjYyMjQ&amp;ixlib=rb-4.0.3&amp;w=1200"
+                class="home-hero-image1"
+              />
+            </div>
+            <!--Instruction-->
+            <div class="home-content1">
+              <span class="home-text03 before-Heading">GET STARTED</span>
+              <h1 class="home-text04">Get your precise routes</h1>
+              <div class="home-container2">
+                <div class="home-number">
+                  <span class="home-text05">1</span>
+                </div>
+                <span class="home-title1">
+                  Open your location services in the phone setting and allow
+                  location access for your web browser.
+                </span>
+              </div>
+              <div class="home-container3">
+                <div class="home-number1">
+                  <span class="home-text06">2</span>
+                </div>
+                <span class="home-title2">
+                  Sign up or Log in to your account (no spaces in username)
+                </span>
+              </div>
+              <div class="home-container4">
+                <div class="home-number2">
+                  <span class="home-text07">3</span>
+                </div>
+                <span class="home-title3">
+                  Click "Start" and allow the website to track your location
+                </span>
+              </div>
+              <div class="home-container5">
+                <div class="home-number3">
+                  <span class="home-text08">4</span>
+                </div>
+                <span class="home-title4">
+                  Keep the website always open while tracking your location
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--add footer-->
+        <footer class="home-footer">
+          <span class="home-text09">
+            <span>Copyright 2022, GEOG 384 - Group 2, Martin Paraire,&nbsp;</span>
+            <span>Erik Moore, and&nbsp;</span>
+            <span>Yanbing Chen.&nbsp;All rights reserved.&nbsp;</span>
+          </span>
+        </footer>
+      </div>
+    </div>
+    <script>
+      window.onload = () => {
+        const runAllScripts = () => {
+          initializeAllAccordions()
+        }
+
+        const listenForUrlChanges = () => {
+          let url = location.href
+          document.body.addEventListener(
+            'click',
+            () => {
+              requestAnimationFrame(() => {
+                if (url !== location.href) {
+                  runAllScripts()
+                  url = location.href
+                }
+              })
+            },
+            true
+          )
+        }
+
+        const initializeAllAccordions = () => {
+          const allAccordions = document.querySelectorAll('[data-role="Accordion"]');
+
+          allAccordions.forEach((accordion) => {
+            const accordionHeader = accordion.querySelector('[data-type="accordion-header"]')
+            const accordionContent = accordion.querySelector('[data-type="accordion-content"]')
+
+            accordionHeader.addEventListener('click', () => {
+              if (accordionContent.style.maxHeight) {
+                accordionContent.style.maxHeight = ''
+              } else {
+                accordionContent.style.maxHeight = `${accordionContent.scrollHeight}px`
+              }
+            })
+          })
+        }
+
+        listenForUrlChanges()
+        runAllScripts()
+      }
+    </script>
+  </body>
+</html>

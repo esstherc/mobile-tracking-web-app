@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Path Visualization</title>
+    <link rel="icon" type="image/x-con" href="https://pic.onlinewebfonts.com/svg/img_509228.png">
+    <meta property="og:title" content="Mobile Tracking" />
+	<link href="https://api.mapbox.com/mapbox-gl-js/v2.10.0/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.10.0/mapbox-gl.js"></script>
+
+    <style data-tag="reset-style-sheet">
+      html {  line-height: 1.15;}body {  margin: 0;}* {  box-sizing: border-box;  border-width: 0;  border-style: solid;}p,li,ul,pre,div,h1,h2,h3,h4,h5,h6 {  margin: 0;  padding: 0;}button {  background-color: transparent;}button,input,optgroup,select,textarea {  font-family: inherit;  font-size: 100%;  line-height: 1.15;  margin: 0;}button,select {  text-transform: none;}button,[type="button"],[type="reset"],[type="submit"] {  -webkit-appearance: button;}button::-moz-focus-inner,[type="button"]::-moz-focus-inner,[type="reset"]::-moz-focus-inner,[type="submit"]::-moz-focus-inner {  border-style: none;  padding: 0;}button:-moz-focus,[type="button"]:-moz-focus,[type="reset"]:-moz-focus,[type="submit"]:-moz-focus {  outline: 1px dotted ButtonText;}a {  color: inherit;  text-decoration: inherit;}input {  padding: 2px 4px;}img {  display: block;}html { scroll-behavior: smooth  }
+    </style>
+    <style data-tag="default-style-sheet">
+
+	<!-- We setup the CSS for every item, first font family for whole webpage, to specific font-family and text condition   
+	We set up the map CSS, to adujst it to fit in the webpage, also to specifically target the map present with # 
+	We set up the legend CSS, to adjust it to fit in the upper left corner of the map and apply to all legend item with .
+	We then set up the menu CSS to have it change color between active and static, while fitting at the left of the map
+	Finally, we set up legend for the direction button, to make it look different shape of green and setting the border radius to 50% to give it an oval shape--> 
+	
+	html {
+        font-family: Titillium Web;
+        font-size: 16px;
+      }
+
+      body {
+        font-weight: 400;
+        font-style:normal;
+        text-decoration: none;
+        text-transform: none;
+        letter-spacing: normal;
+        line-height: 1.15;
+        color: var(--dl-color-scheme-green100);
+        background-color: var(--dl-color-scheme-yellow20);
+
+      }
+	 #map { margin: 15px, position: static; top: 0; bottom: 0; width: 1000px; height:470px }
+ 
+	.legend {
+        background-color:  #00cc00;
+        border-radius: 3px;
+        top: 261px;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+        padding: 8px;
+        position: absolute;
+        left: 132px;
+        z-index: 1;
+		text-align: top-left;
+    }
+	.legend h4 {
+    margin: 0 10px 3px;
+    }
+ 
+ .legend div span {
+        border-radius: 50%;
+        display: inline-block;
+        height: 10px;
+        margin-left: 5px;
+        width: 10px;
+    }
+    #menu {
+        background: #fff;
+        position: absolute;
+        z-index: 1;
+        top: 300px;
+        right: 10px;
+        border-radius: 3px;
+        width: 120px;
+        border: 1px solid rgba(0, 0, 0, 0.4);
+        font-family: 'Open Sans', sans-serif;
+    }
+
+    #menu a {
+        font-size: 13px;
+        color: #009933;
+        display: block;
+        margin: 0;
+        padding: 0;
+        padding: 10px;
+        text-decoration: none;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+        text-align: center;
+    }
+
+    #menu a:last-child {
+        border: none;
+    }
+
+    #menu a:hover {
+        background-color: #00ff00;
+        color: #404040;
+    }
+
+    #menu a.active {
+        background-color: #009933;
+        color: #ffffff;
+    }
+
+    #menu a.active:hover {
+        background-color: #004d00;
+    }
+	
+	
+	#coord1,#coord2,#coord3 {
+	border: none;
+	padding: 15px 20px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	margin: 4px 2px;
+	cursor: pointer;
+	position: static;
+	z-index: 7;
+	border-radius: 50%;
+	}
+	
+    </style>
+    <!--We set up the upper bar section, who have their own independent CSS file-->
+	<link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Lexend:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&amp;display=swap"
+      data-tag="font"
+    />
+    <!--This is the head section-->
+    <!-- <script type="text/javascript"> ... </script> -->
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div>
+      <link href="./home.css" rel="stylesheet" />
+
+      <div class="home-container">
+        <div class="home-navbar navbar-container">
+          <div class="max-width">
+            <div class="home-logo">
+              <a href="index.html" class="home-navlink">
+                <img
+                  alt="image"
+                  src="public/playground_assets/group_2.svg"
+                  class="home-image"
+                />
+              </a>
+              <span class="home-text">
+                <span class="home-text01">GROUP2 -</span>
+                <span>Mobile Tracking App</span>
+              </span>
+            </div>
+            <div class="home-links">
+              <a href="index.html" class="home-link button button-primary">
+                How it Works
+              </a>
+              <button class="home-button button button-primary">
+                <a
+                href="Map.html">Path Visualization
+				        </a>
+              </button>
+              <button class="home-button1 button button-primary">
+                <a 
+                href="path.html"> Space Time Path
+                </a>
+              </button>
+              <a
+                href="start-track.html"
+                class="home-navlink1 button button-primary"
+              >
+                Log in
+              </a>
+            </div>
+            <div class="home-burger-menu navbar-burger-menu">
+              <svg viewBox="0 0 1024 1024" class="home-icon">
+                <path
+                  d="M128 256h768v86h-768v-86zM128 554v-84h768v84h-768zM128 768v-86h768v86h-768z"
+                ></path>
+              </svg>
+            </div>
+          </div>
+        </div>
+		
+		<!-- Here, we add the main part for the map, that is first the navigation bar to toggle or untoggle each element, that will be triggered in the script
+		 Then, we add the three direction button, with each one calling the fuction with its' unique input to trigger function myCoordinates in the script
+		 Next, we add the map, that is stucked against the left margin to add center it in the middle
+		 Finally, we add the legend, carved on top of the map, giving the corresponding color to each ID's of input-->
+		<nav id="menu"></nav>
+		<button id="coord1" style = "background-color: #009933" onclick = "myCoordinates(1)">User 1</button>
+		<button id="coord2" style = "background-color: #004d00; color:#00b33c" onclick = "myCoordinates(2)">User 2</button>
+		<button id="coord3" style = "background-color: #00ff00" onclick = "myCoordinates(3)">User 3</button>
+		<div id="map" style="margin-left: 0px"></div>
+	<div id="User's ID" class="legend">
+	<h4 style = "font-family:Cursive">User's ID</h4>
+	<div><span style="background-color: #009933">  260909959</span></div>
+	<div><span style="background-color: #004d00">  260917220</span></div>
+	<div><span style="background-color: #00ff00">  260888246</span></div>
+	</div>
+
+        <!--add footer-->
+    <footer class="Map-footer">
+          <span class="Map-text10">
+            <span>Copyright 2022, GEOG 384 - Group 2, Martin Paraire,&nbsp;</span>
+            <span>Erik Moore, and&nbsp;</span>
+            <span>Yanbing Chen.&nbsp;All rights reserved.&nbsp;</span>
+          </span>
+        </footer>
+		</div>
+	</div>
+</body>
+<script>
+// Here we set up the map, with personal token and with specific instruction. Here we restrict maximum zoom to 21 and minimum zoom to 13, and for now center it to downtown Montreal
+	mapboxgl.accessToken = 'pk.eyJ1IjoibXBhcmFpcmUiLCJhIjoiY2w3cWh1bWMzMDVtYjNxazJneGJtZnM1ZiJ9.HxDhzRwqMPvdz6IjZH_ASQ';
+    const map = new mapboxgl.Map({
+        container: 'map', 
+        style: 'mapbox://styles/mapbox/streets-v11',
+		center : [-73.5707136,45.5049216],
+        minZoom: 13,
+		maxZoom: 21,
+        zoom: 13,
+        projection: 'equirectangular',
+		pitch: 0,
+        bearing: 10
+    });
+	
+//We restrict the user from tilting the map, to protect arrangement of the whole website. We also set up a zoom and compass bar on the right upper corner of the map
+	map.dragRotate.disable();
+	map.touchZoomRotate.disableRotation();
+	map.addControl(new mapboxgl.NavigationControl());
+
+// We set-up, with three different code, the sources of the map using addSources and JSON address on local server.	
+	map.on('load', () => {
+	map.addSource('260909959', {
+            'type': 'geojson',
+            'data': './260909959.json',
+        });
+	map.addSource('260917220', {
+            'type': 'geojson',
+            'data': './260917220.json',
+        });
+	map.addSource('260888246', {
+            'type': 'geojson',
+            'data': './260888246.json',
+        });
+// With those Sources, we carve 3 different layer named User 1,2 and 3 with a different shade of green, each of which with the attribute visible to make disappear if needed 
+		map.addLayer({
+		'id': 'User 1',
+            'type': 'line',
+            'source': '260909959',
+            'layout': {
+                'line-join': 'round',
+                'line-cap': 'round',
+				'visibility': 'visible'
+            },
+            'paint': {
+                'line-color': '#009933',
+                'line-width': 5
+            }
+        });
+		map.addLayer({
+		'id': 'User 2',
+            'type': 'line',
+            'source': '260917220',
+            'layout': {
+                'line-join': 'round',
+                'line-cap': 'round',
+				'visibility': 'visible'
+            },
+            'paint': {
+                'line-color': '#004d00',
+                'line-width': 5
+            }
+        });
+		map.addLayer({
+		'id': 'User 3',
+            'type': 'line',
+            'source': '260888246',
+            'layout': {
+                'line-join': 'round',
+                'line-cap': 'round',
+				'visibility': 'visible'
+            },
+            'paint': {
+                'line-color': '#00ff00',
+                'line-width': 5
+            }
+        });
+	});
+	
+// Now, we want the map to be togglable, to do so, we set up an idle mode for the map, and check whether the three layers are loaded.
+// That is, each time we click on the menu, this loop gets activated
+	map.on('idle', () => {
+		if (!map.getLayer('User 1') || !map.getLayer('User 2') || !map.getLayer('User 3')) {
+		return;
+		}
+//We set-up a corresponding toggle button for each layer using their ID, 
+	const toggleableLayerIds = ['User 1', 'User 2','User 3'];
+	for (const id of toggleableLayerIds) {
+	//We avoid having the button repeating endlessly using if loop to check whether the id already has a button
+	if (document.getElementById(id)) {
+		continue;
+	}
+	// We create a link to identify each layer
+	const link = document.createElement('a');
+	link.id = id;
+	link.href = '#';
+	link.textContent = id;
+	link.className = 'active';
+	
+	//We now change the visibility of the layer whether it has already been toggled or not
+	link.onclick = function (e) {
+	const clickedLayer = this.textContent;
+	e.preventDefault();
+	e.stopPropagation();
+	
+	const visibility = map.getLayoutProperty(
+		clickedLayer,
+		'visibility'
+	);
+	
+	if (visibility === 'visible') {
+	   map.setLayoutProperty(clickedLayer, 'visibility', 'none');
+	   this.className = '';
+	   } else {
+		this.className = 'active';
+		map.setLayoutProperty(
+		clickedLayer,
+		'visibility',
+		'visible'
+			);
+		}
+	};
+	const layers = document.getElementById('menu');
+	layers.appendChild(link);
+	}
+});
+
+
+// Now, we want the upper button to lead the user to their line. We use a function imbedded within each button with specific number to has the map zooming to the tail of the line
+function myCoordinates(user){
+if(user == 1){
+	map.flyTo({
+	center: [-73.579441,45.505653],
+	});
+	}else if(user == 2){
+	map.flyTo({
+	center: [-73.57682799999998,45.501819609999984],
+	});
+	}else{
+	map.flyTo({
+	center: [5.4696276,43.534102],
+	});
+	}
+}
+
+// Now, we create pop-up but first initating them
+const popup = new mapboxgl.Popup({
+	closeButton: false,
+	closeOnClick: false
+});
+
+// Then, we create a constant function to activate pop-up on hoovere for all three layers
+const enterpopup = e => {
+map.getCanvas().style.cursor = 'crosshair';
+//const coordinates = e.features[0].geometry.coordinates;
+//const description = e.features[0].title;
+ 
+//while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+//coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+//}
+ 
+//popup.setLngLat(coordinates).setHTML(description).addTo(map);
+};
+
+
+map.on('mouseenter', 'User 3', enterpopup);
+map.on('mouseenter', 'User 1', enterpopup);
+map.on('mouseenter', 'User 2', enterpopup);
+
+const outpopup = e => {
+map.getCanvas().style.cursor = '';
+popup.remove();
+};
+
+map.on('mouseleave', 'User 1', outpopup);
+map.on('mouseenter', 'User 2', outpopup);
+map.on('mouseenter', 'User 3', outpopup);
+
+</script>
+</body>
+</html>
